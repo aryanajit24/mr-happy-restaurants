@@ -12,16 +12,25 @@ Deployed automatically to GitHub Pages from the `main` branch on every push.
 
 ## ⚡ One-time Setup (do this once, then it's automatic)
 
-Before the site goes live you need to activate GitHub Pages in the repo settings:
+Before the site goes live you need to activate GitHub Pages in the repo settings — this only needs to happen once:
 
-1. **Merge this PR** into `main` first (the workflow file must be on `main`).
+1. **Merge this PR** into `main` first. The workflow file (`deploy.yml`) must be on `main` before GitHub Pages can use it. Any other workflow files that were previously added for GitHub Pages (e.g. `static.yml`, `jekyll-gh-pages.yml`) are removed by this PR — the new `deploy.yml` is the only one needed.
+
 2. Go to **https://github.com/aryanajit24/mr-happy-restaurants/settings/pages**
-3. Under **"Build and deployment"**, click the **Source** dropdown (it may say *"Deploy from a branch"*) and choose **"GitHub Actions"**.
-4. Click **Save**.
-5. The deployment will start automatically within a few seconds — you can watch it at **Actions → Deploy to GitHub Pages**.
-6. Once it finishes (usually < 2 minutes), visit **https://aryanajit24.github.io/mr-happy-restaurants/** and the site will be live. 🎉
 
-> **Note:** The repo is private but the published Pages site will be public — GitHub warns you about this during setup. That's expected for a restaurant website.
+3. Under **"Build and deployment"** → **"Source"**, open the dropdown and select **"GitHub Actions"**.
+   - The dropdown may currently say *"Deploy from a branch"*. Click it, then choose **"GitHub Actions"** from the list.
+   - A **Save** button will appear immediately to the right of the dropdown (or just below it on narrow screens). Click **Save**.
+   - If you do not see a Save button after selecting "GitHub Actions", try scrolling down — it may be below the fold.
+
+4. The workflow will start automatically within seconds. Watch progress at **Actions → "Deploy to GitHub Pages"**.
+
+5. Once the workflow finishes (usually under 2 minutes) the site is live at:
+   **https://aryanajit24.github.io/mr-happy-restaurants/** 🎉
+
+> **Note:** The repo is private but the published Pages site will be public — GitHub warns about this when you enable Pages. That's expected for a restaurant website.
+>
+> **Troubleshooting "Save" button:** The Save button only appears after you actively change the Source selection. If you already see "GitHub Actions" selected and no Save button, Pages may already be configured correctly — check the Actions tab to see if a deployment is running.
 
 ---
 
