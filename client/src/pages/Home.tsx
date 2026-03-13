@@ -235,6 +235,31 @@ export default function Home() {
               </div>
             )}
 
+            {/* ─── Mobile category scroll (outside flex for proper mobile layout) ─── */}
+            <div className="lg:hidden w-full mb-4">
+              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                    !selectedCategory ? 'bg-[#C4622D] text-white border-[#C4622D]' : 'border-border hover:border-[#C4622D]/50'
+                  }`}
+                >
+                  Alle
+                </button>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                      selectedCategory === cat ? 'bg-[#C4622D] text-white border-[#C4622D]' : 'border-border hover:border-[#C4622D]/50'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <div className="flex gap-6">
               {/* ─── Left sidebar: category navigation ─── */}
               <aside className="hidden lg:block w-52 shrink-0">
@@ -274,31 +299,6 @@ export default function Home() {
                   })}
                 </div>
               </aside>
-
-              {/* ─── Mobile category scroll ─── */}
-              <div className="lg:hidden w-full mb-4">
-                <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                  <button
-                    onClick={() => setSelectedCategory(null)}
-                    className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-                      !selectedCategory ? 'bg-[#C4622D] text-white border-[#C4622D]' : 'border-border hover:border-[#C4622D]/50'
-                    }`}
-                  >
-                    Alle
-                  </button>
-                  {categories.map((cat) => (
-                    <button
-                      key={cat}
-                      onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)}
-                      className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
-                        selectedCategory === cat ? 'bg-[#C4622D] text-white border-[#C4622D]' : 'border-border hover:border-[#C4622D]/50'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* ─── Main menu content ─── */}
               <div className="flex-1 min-w-0">
