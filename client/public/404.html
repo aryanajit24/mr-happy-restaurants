@@ -16,7 +16,8 @@
         "redirect",
         l.pathname + l.search + l.hash
       );
-      l.replace(new URL("/?p=1", l.origin + l.pathname.split("/").slice(0, 2).join("/")).href);
+      var baseSegment = l.pathname.split("/").slice(0, 2).join("/");
+      l.replace(new URL("/?p=1", l.origin + baseSegment).href);
     </script>
   </head>
   <body></body>
