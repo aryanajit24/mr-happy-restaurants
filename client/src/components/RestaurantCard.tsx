@@ -4,6 +4,7 @@
 import { Star, Clock, Truck, MapPin, ShieldCheck } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import type { Restaurant } from '../data/restaurants';
+import { isRestaurantOpen, getRestaurantHoursDisplay } from '../data/restaurants';
 
 interface Props {
   restaurant: Restaurant;
@@ -30,8 +31,18 @@ export default function RestaurantCard({ restaurant, selected, onClick }: Props)
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-        {/* Certifications */}
+        {/* Certifications + Status */}
         <div className="absolute top-3 right-3 flex flex-col gap-1">
+          {isRestaurantOpen(restaurant) ? (
+            <div className="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1 animate-pulse">
+              <div className="w-2 h-2 bg-white rounded-full" />
+              Offen
+            </div>
+          ) : (
+            <div className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+              Geschlossen
+            </div>
+          )}
           {restaurant.certifications.map((cert) => (
             <div key={cert} className="bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1">
               <ShieldCheck className="w-3 h-3" />
@@ -56,7 +67,7 @@ export default function RestaurantCard({ restaurant, selected, onClick }: Props)
         <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{restaurant.description}</p>
 
         <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1">
+          <span className="flex items-center gap-1 hover:text-foreground cursor-help" title={getRestaurantHoursDisplay(restaurant)}>
             <Clock className="w-3.5 h-3.5 text-[#C4622D]" />
             {restaurant.deliveryTime}
           </span>

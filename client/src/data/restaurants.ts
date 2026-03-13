@@ -1,6 +1,16 @@
 // Design: Warm Mediterranean Bistro — Terracotta, Warm Sand, Deep Olive
 // Restaurant data for Mr. Happy Restaurants
 
+export interface OpeningHours {
+  monday: { open: string; close: string };
+  tuesday: { open: string; close: string };
+  wednesday: { open: string; close: string };
+  thursday: { open: string; close: string };
+  friday: { open: string; close: string };
+  saturday: { open: string; close: string };
+  sunday: { open: string; close: string };
+}
+
 export interface Restaurant {
   id: string;
   name: string;
@@ -16,8 +26,18 @@ export interface Restaurant {
   address: string;
   phone: string;
   certifications: string[];
-  isOpen: boolean;
+  openingHours: OpeningHours;
 }
+
+const defaultHours: OpeningHours = {
+  monday: { open: '11:00', close: '22:00' },
+  tuesday: { open: '11:00', close: '22:00' },
+  wednesday: { open: '11:00', close: '22:00' },
+  thursday: { open: '11:00', close: '22:00' },
+  friday: { open: '11:00', close: '23:00' },
+  saturday: { open: '11:00', close: '23:00' },
+  sunday: { open: '12:00', close: '22:00' },
+};
 
 export const restaurants: Restaurant[] = [
   {
@@ -35,7 +55,7 @@ export const restaurants: Restaurant[] = [
     address: 'Zum Alten Speicher 1-2, 28759 Bremen Vegesack',
     phone: '04209/8989990',
     certifications: ['100% HALAL'],
-    isOpen: true,
+    openingHours: defaultHours,
   },
   {
     id: 'restaurant2',
@@ -52,7 +72,7 @@ export const restaurants: Restaurant[] = [
     address: 'Zum Alten Speicher 1-2, 28759 Bremen Vegesack',
     phone: '04209/8989990',
     certifications: [],
-    isOpen: true,
+    openingHours: defaultHours,
   },
   {
     id: 'restaurant3',
@@ -69,9 +89,29 @@ export const restaurants: Restaurant[] = [
     address: 'Heidkamp 25, 28790 Schwanewede',
     phone: '042098989992',
     certifications: ['Döner 100% HALAL'],
-    isOpen: true,
+    openingHours: defaultHours,
   },
 ];
 
+export const isRestaurantOpen = (restaurant: Restaurant): boolean => {
+  const now = new Date();
+  const dayOfWeek = now.getDay();
+  const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as const;
+  const today = dayNames[dayOfWeek];
+  const hours = restaurant.openingHours[today];
+  const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  return currentTime >= hours.open && currentTime <= hours.close;
+};
+
 export const getRestaurantById = (id: string): Restaurant | undefined =>
   restaurants.find((r) => r.id === id);
+
+export const getRestaurantHoursDisplay = (restaurant: Restaurant): string => {
+  const dayOfWeek = new Date().getDay();
+  const dayNames = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+  const today = dayNames[dayOfWeek];
+  const dayKeys: Array<keyof OpeningHours> = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+  const dayKey = dayKeys[dayOfWeek];
+  const hours = restaurant.openingHours[dayKey];
+  return `${today}: ${hours.open} - ${hours.close}`;
+};
