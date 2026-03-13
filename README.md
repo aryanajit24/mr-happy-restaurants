@@ -10,6 +10,21 @@ Deployed automatically to GitHub Pages from the `main` branch on every push.
 
 ---
 
+## ⚡ One-time Setup (do this once, then it's automatic)
+
+Before the site goes live you need to activate GitHub Pages in the repo settings:
+
+1. **Merge this PR** into `main` first (the workflow file must be on `main`).
+2. Go to **https://github.com/aryanajit24/mr-happy-restaurants/settings/pages**
+3. Under **"Build and deployment"**, click the **Source** dropdown (it may say *"Deploy from a branch"*) and choose **"GitHub Actions"**.
+4. Click **Save**.
+5. The deployment will start automatically within a few seconds — you can watch it at **Actions → Deploy to GitHub Pages**.
+6. Once it finishes (usually < 2 minutes), visit **https://aryanajit24.github.io/mr-happy-restaurants/** and the site will be live. 🎉
+
+> **Note:** The repo is private but the published Pages site will be public — GitHub warns you about this during setup. That's expected for a restaurant website.
+
+---
+
 ## 🚀 Deployments
 
 ### How it works
