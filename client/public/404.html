@@ -16,7 +16,7 @@
         "redirect",
         l.pathname + l.search + l.hash
       );
-      l.replace(l.protocol + "//" + l.hostname + (l.port ? ":" + l.port : "") + l.pathname.split("/").slice(0, 2).join("/") + "/?p=1");
+      l.replace(new URL("/?p=1", l.origin + l.pathname.split("/").slice(0, 2).join("/")).href);
     </script>
   </head>
   <body></body>

@@ -10,7 +10,7 @@ function AppRoutes() {
   // wouter's Router `base` prop must not have a trailing slash so that
   // route matching strips the prefix correctly (e.g. "/mr-happy-restaurants"
   // lets "/" match the Home route at "/mr-happy-restaurants/").
-  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
   // make sure to consider if you need authentication for certain routes
   return (
     <Router base={base}>
