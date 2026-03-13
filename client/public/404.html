@@ -7,8 +7,10 @@
       // Single-page-app redirect for GitHub Pages.
       // Stores the full path in sessionStorage and redirects to the root so
       // the Vite bundle can pick it up via the script in index.html.
-      // slice(0, 2) extracts the repo segment from the pathname, e.g.
-      // "/mr-happy-restaurants/some/page" → "/mr-happy-restaurants".
+      // split("/") on "/mr-happy-restaurants/some/page" gives
+      // ["", "mr-happy-restaurants", "some", "page"]; slice(0, 2) keeps the
+      // first two segments (empty string + repo name) so we redirect to
+      // "/mr-happy-restaurants/" rather than the site root "/".
       var l = window.location;
       sessionStorage.setItem(
         "redirect",
