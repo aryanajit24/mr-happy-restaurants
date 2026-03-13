@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mr. Happy Restaurants</title>
+    <script>
+      // Single-page-app redirect for GitHub Pages.
+      // Stores the full path in sessionStorage and redirects to the root so
+      // the Vite bundle can pick it up via the script in index.html.
+      // split("/") on "/mr-happy-restaurants/some/page" gives
+      // ["", "mr-happy-restaurants", "some", "page"]; slice(0, 2) keeps the
+      // first two segments (empty string + repo name) so we redirect to
+      // "/mr-happy-restaurants/" rather than the site root "/".
+      var l = window.location;
+      sessionStorage.setItem(
+        "redirect",
+        l.pathname + l.search + l.hash
+      );
+      var baseSegment = l.pathname.split("/").slice(0, 2).join("/");
+      l.replace(new URL("/?p=1", l.origin + baseSegment).href);
+    </script>
+  </head>
+  <body></body>
+</html>
